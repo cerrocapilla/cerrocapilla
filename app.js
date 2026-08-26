@@ -3479,7 +3479,7 @@ const noticias = [
         descripcion: "Se inauguró el sendero de los artistas, un recorrido con obras de artistas locales.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia321/400/200", fecha: "12 de Junio"
     },
-    /*{
+    {
         id: 322, nombre: "Capilla del Monte recibe premio internacional", categoria: "Noticia",
         direccion: "Municipalidad", coordenadas: [-30.8563, -64.5256],
         telefono: "+5493548123456", whatsapp: "+5493548123456", instagram: "@premiocapilla",
@@ -3488,7 +3488,7 @@ const noticias = [
         descripcion: "Capilla del Monte recibió un premio internacional por su compromiso con el turismo sustentable.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia322/400/200", fecha: "20 de Junio"
     },
-    {
+    /*{
         id: 323, nombre: "Nuevo centro de deportes de aventura", categoria: "Noticia",
         direccion: "Cerro Uritorco - Base", coordenadas: [-30.8460, -64.4950],
         telefono: "+5493548234567", whatsapp: "+5493548234567", instagram: "@deportesaventura",
