@@ -3497,7 +3497,7 @@ const noticias = [
         descripcion: "Se inauguró un nuevo centro de deportes de aventura con actividades de trekking, escalada y tirolesa.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia323/400/200", fecha: "28 de Junio"
     },
-    /*{
+    {
         id: 324, nombre: "Se duplica la oferta gastronómica", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548345678", whatsapp: "+5493548345678", instagram: "@gastronomiacapilla",
@@ -3506,7 +3506,7 @@ const noticias = [
         descripcion: "Se duplicó la oferta gastronómica de Capilla del Monte con nuevos restaurantes y propuestas culinarias.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia324/400/200", fecha: "5 de Julio"
     },
-    {
+    /*{
         id: 325, nombre: "Nuevo proyecto de alumbrado público", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548456789", whatsapp: "+5493548456789", instagram: "@alumbradocapilla",
