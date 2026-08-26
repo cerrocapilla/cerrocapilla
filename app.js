@@ -3488,7 +3488,7 @@ const noticias = [
         descripcion: "Capilla del Monte recibió un premio internacional por su compromiso con el turismo sustentable.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia322/400/200", fecha: "20 de Junio"
     },
-    /*{
+    {
         id: 323, nombre: "Nuevo centro de deportes de aventura", categoria: "Noticia",
         direccion: "Cerro Uritorco - Base", coordenadas: [-30.8460, -64.4950],
         telefono: "+5493548234567", whatsapp: "+5493548234567", instagram: "@deportesaventura",
@@ -3497,7 +3497,7 @@ const noticias = [
         descripcion: "Se inauguró un nuevo centro de deportes de aventura con actividades de trekking, escalada y tirolesa.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia323/400/200", fecha: "28 de Junio"
     },
-    {
+    /*{
         id: 324, nombre: "Se duplica la oferta gastronómica", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548345678", whatsapp: "+5493548345678", instagram: "@gastronomiacapilla",
