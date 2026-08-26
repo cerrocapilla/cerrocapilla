@@ -457,7 +457,7 @@ const lugares = [
         nombre: "Agua de Los Palos", 
         categoria: "Turismo Aventura",
         direccion: "Av.las Gemelas", 
-        coordenadas: [-30.8600, -64.5190],
+        coordenadas: [-30.886437, -64.497687],
         telefono: null, 
         whatsapp: "+5493548419465", 
         instagram: "@aguadelospalos",
