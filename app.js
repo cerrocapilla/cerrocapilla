@@ -3371,7 +3371,7 @@ const noticias = [
         foto: "https://picsum.photos/seed/noticia309/400/200", 
         fecha: "12 de Marzo"
     },
-    /*{
+    {
         id: 310, nombre: "Se inaugura el primer museo interactivo", categoria: "Noticia",
         direccion: "Museo de la Ciudad", coordenadas: [-30.8580, -64.5260],
         telefono: "+5493548901234", whatsapp: "+5493548901234", instagram: "@museointeractivo",
@@ -3380,7 +3380,7 @@ const noticias = [
         descripcion: "Se inauguró el primer museo interactivo de la región con tecnología de vanguardia y experiencias inmersivas.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia310/400/200", fecha: "20 de Marzo"
     },
-    {
+    /*{
         id: 311, nombre: "Nuevo proyecto de desarrollo sustentable", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548012345", whatsapp: "+5493548012345", instagram: "@desarrollosustentable",
