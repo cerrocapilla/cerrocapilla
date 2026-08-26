@@ -3461,7 +3461,7 @@ const noticias = [
         descripcion: "Capilla del Monte fue seleccionada entre los mejores destinos de montaña de Sudamérica.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia319/400/200", fecha: "28 de Mayo"
     },
-    /*{
+    {
         id: 320, nombre: "Nuevo programa de guías locales", categoria: "Noticia",
         direccion: "Secretaría de Turismo", coordenadas: [-30.8606, -64.5229],
         telefono: "+5493548901234", whatsapp: "+5493548901234", instagram: "@guiaslocales",
@@ -3470,7 +3470,7 @@ const noticias = [
         descripcion: "Se lanzó un nuevo programa de formación de guías locales con certificación oficial.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia320/400/200", fecha: "5 de Junio"
     },
-    {
+    /*{
         id: 321, nombre: "Se inaugura el sendero de los artistas", categoria: "Noticia",
         direccion: "Calle Techada", coordenadas: [-30.8596, -64.5238],
         telefono: "+5493548012345", whatsapp: "+5493548012345", instagram: "@senderodeartistas",
