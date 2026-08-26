@@ -3506,7 +3506,7 @@ const noticias = [
         descripcion: "Se duplicó la oferta gastronómica de Capilla del Monte con nuevos restaurantes y propuestas culinarias.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia324/400/200", fecha: "5 de Julio"
     },
-    /*{
+    {
         id: 325, nombre: "Nuevo proyecto de alumbrado público", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548456789", whatsapp: "+5493548456789", instagram: "@alumbradocapilla",
@@ -3515,7 +3515,7 @@ const noticias = [
         descripcion: "Se presentó un nuevo proyecto de alumbrado público con tecnología LED en toda la ciudad.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia325/400/200", fecha: "12 de Julio"
     },
-    {
+    /*{
         id: 326, nombre: "Capilla del Monte se une a la red de pueblos mágicos", categoria: "Noticia",
         direccion: "Municipalidad", coordenadas: [-30.8563, -64.5256],
         telefono: "+5493548567890", whatsapp: "+5493548567890", instagram: "@pueblosmagicos",
