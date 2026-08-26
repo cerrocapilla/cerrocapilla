@@ -3380,7 +3380,7 @@ const noticias = [
         descripcion: "Se inauguró el primer museo interactivo de la región con tecnología de vanguardia y experiencias inmersivas.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia310/400/200", fecha: "20 de Marzo"
     },
-    /*{
+    {
         id: 311, nombre: "Nuevo proyecto de desarrollo sustentable", categoria: "Noticia",
         direccion: "Todo el municipio", coordenadas: [-30.8580, -64.5240],
         telefono: "+5493548012345", whatsapp: "+5493548012345", instagram: "@desarrollosustentable",
@@ -3389,7 +3389,7 @@ const noticias = [
         descripcion: "Se presentó un nuevo proyecto de desarrollo sustentable que posicionará a Capilla del Monte como referente en turismo responsable.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia311/400/200", fecha: "28 de Marzo"
     },
-    {
+    /*{
         id: 312, nombre: "Capilla del Monte se prepara para la temporada", categoria: "Noticia",
         direccion: "Secretaría de Turismo", coordenadas: [-30.8606, -64.5229],
         telefono: "+5493548123456", whatsapp: "+5493548123456", instagram: "@turismocapilla",
