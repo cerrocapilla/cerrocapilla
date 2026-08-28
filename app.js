@@ -3560,7 +3560,7 @@ const noticias = [
         descripcion: "Se inauguró el nuevo mirador en la cima del cerro Uritorco con vistas panorámicas inigualables.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia330/400/200", fecha: "20 de Agosto"
     },
-    /*{
+    {
         id: 331, nombre: "Capilla del Monte apuesta al turismo familiar", categoria: "Noticia",
         direccion: "Secretaría de Turismo", coordenadas: [-30.8606, -64.5229],
         telefono: "+5493548012345", whatsapp: "+5493548012345", instagram: "@turismofamiliar",
@@ -3569,7 +3569,7 @@ const noticias = [
         descripcion: "Capilla del Monte lanza una campaña para posicionarse como destino de turismo familiar con actividades para todas las edades.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia331/400/200", fecha: "28 de Agosto"
     },
-    {
+    /*{
         id: 332, nombre: "Nuevo programa de turismo accesible", categoria: "Noticia",
         direccion: "Municipalidad", coordenadas: [-30.8563, -64.5256],
         telefono: "+5493548123456", whatsapp: "+5493548123456", instagram: "@turismoaccesible",
