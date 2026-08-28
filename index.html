@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌄 Capilla del Monte - Guía Turística</title>
+    
+    <link rel="stylesheet" href="style.css?v=20250828">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== BARRA SUPERIOR ===== -->
+<header>
+    <div class="logo">
+        <i class="fas fa-mountain"></i>
+        <span class="logo-full">Capilla del Monte</span>
+        <span class="logo-short" style="display:none;">Capilla</span>
+    </div>
+    <div class="header-actions">
+        <a href="https://facebook.com/turismocapilla" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/turismocapilla" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/turismocapilla" target="_blank"><i class="fab fa-twitter"></i></a>
+        <button id="btnMiUbicacion" title="Ir a mi ubicación">
+            <i class="fas fa-location-dot"></i>
+        </button>
+        <button id="btnNotificaciones" title="Notificaciones" style="background:#D4A843;color:white;position:relative;">
+            <i class="fas fa-bell"></i>
+            <span id="notificacionesBadge" style="display:none;position:absolute;top:-4px;right:-4px;background:#E74C3C;color:white;font-size:10px;font-weight:700;border-radius:50%;min-width:18px;height:18px;align-items:center;justify-content:center;border:2px solid white;padding:0 4px;font-family:'Nunito',sans-serif;line-height:1;">0</span>
+        </button>
+    </div>
+</header>
+
+<!-- ===== CONTENEDOR PRINCIPAL ===== -->
+<div id="main-container">
+    <div id="map"></div>
+    
+    <!-- ===== PANEL DE INFORMACIÓN ===== -->
+    <div id="info-panel" style="display: none;">
+        <div id="info-content">
+            <button id="btnCerrarInfo"><i class="fas fa-xmark"></i></button>
+            <div class="info-header">
+                <h2 id="infoNombre">Nombre</h2>
+                <span id="infoCategoria" class="categoria-badge">Categoría</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-location-dot"></i>
+                <span id="infoDireccion">Dirección</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span id="infoHorario">Horario</span>
+            </div>
+            <p id="infoDescripcion" class="info-descripcion"></p>
+            <div id="infoDelivery" class="info-delivery">
+                <i class="fas fa-truck"></i>
+                <span id="infoDeliveryTexto">Delivery disponible</span>
+            </div>
+            <!--los iconos para modificar donde sea-->
+            <div id="infoIconos" class="contenedor-iconos" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 8px 0;"></div>
+            <!--hasta aca-->
+
+            <div class="info-redes">
+                <a id="infoWhatsapp" href="#" target="_blank" class="red-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <a id="infoTelefono" href="#" target="_blank" class="red-btn telefono"><i class="fas fa-phone"></i></a>
+                <a id="infoInstagram" href="#" target="_blank" class="red-btn instagram"><i class="fab fa-instagram"></i></a>
+                <a id="infoFacebook" href="#" target="_blank" class="red-btn facebook"><i class="fab fa-facebook"></i></a>
+                <a id="infoTwitter" href="#" target="_blank" class="red-btn twitter"><i class="fab fa-twitter"></i></a>
+                <a id="infoWeb" href="#" target="_blank" class="red-btn web"><i class="fas fa-globe"></i></a>
+            </div>
+            <button id="btnComoLlegar" class="btn-como-llegar">
+                <i class="fas fa-route"></i> Cómo llegar
+            </button>
+        </div>
+    </div>
+    
+    <!-- ===== BOTÓN LUGARES CERCANOS ===== -->
+    <button id="btnCercanos" class="btn-cercanos">
+        <i class="fas fa-map-location-dot"></i>
+        <span>Lugares cercanos</span>
+    </button>
+</div>
+
+<!-- ===== MODAL DE LUGARES CERCANOS ===== -->
+<div id="modalCercanos" style="display: none;">
+    <div class="modal-content">
+        <button class="modal-close" id="btnCerrarModal"><i class="fas fa-xmark"></i></button>
+        <h3><i class="fas fa-map-location-dot"></i> Lugares cercanos</h3>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-quehacer">
+                <i class="fas fa-hiking"></i> Qué hacer
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-quehacer" class="sub-lugares" style="display:none;">
+                <div id="lista-quehacer" class="lista-sub"></div>
+            </div>
+        </div>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-dormir">
+                <i class="fas fa-hotel"></i> Dónde dormir
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-dormir" class="sub-lugares" style="display:none;">
+                <div id="lista-dormir" class="lista-sub"></div>
+            </div>
+        </div>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-comer">
+                <i class="fas fa-utensils"></i> Dónde comer
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-comer" class="sub-lugares" style="display:none;">
+                <div id="lista-comer" class="lista-sub"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SECCIÓN EVENTOS ===== -->
+<div id="seccion-eventos" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-calendar-day"></i> Eventos
+            </h2>
+            <span id="badgeEventos" class="badge-android" data-seccion="eventos">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarEventos" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaEventos" class="eventos-list"></div>
+</div>
+
+<!-- ===== SECCIÓN NOVEDADES ===== -->
+<div id="seccion-novedades" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-newspaper"></i> Novedades
+            </h2>
+            <span id="badgeNovedades" class="badge-android" data-seccion="novedades">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarNovedades" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaNovedades" class="novedades-list"></div>
+</div>
+
+<!-- ===== SECCIÓN NOTICIAS ===== -->
+<div id="seccion-noticias" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-bullhorn"></i> Noticias
+            </h2>
+            <span id="badgeNoticias" class="badge-android" data-seccion="noticias">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarNoticias" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaNoticias" class="noticias-list"></div>
+</div>
+
+<!-- ===== SECCIÓN ADMIN ===== -->
+<div id="seccion-admin" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-user-shield"></i> Admin
+            </h2>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarAdmin" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaAdmin" class="admin-list">
+        <p style="text-align:center;color:#8B6B4A;padding:20px;">🔒 Panel de administración</p>
+        <p style="text-align:center;color:#2E7D32;font-size:13px;">Solo visible para el desarrollador</p>
+    </div>
+</div>
+
+<!-- ===== MENÚ INFERIOR CON BADGES ===== -->
+<div id="menu-secciones">
+    <button id="btnVerEventos" class="menu-btn">
+        <i class="fas fa-calendar-day"></i> Eventos
+        <span id="menuBadgeEventos" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerNovedades" class="menu-btn">
+        <i class="fas fa-newspaper"></i> Novedades
+        <span id="menuBadgeNovedades" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerNoticias" class="menu-btn">
+        <i class="fas fa-bullhorn"></i> Noticias
+        <span id="menuBadgeNoticias" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerAdmin" class="menu-btn" style="display:none;"><i class="fas fa-user-shield"></i> Admin</button>
+    <button id="btnVerMapa" class="menu-btn active"><i class="fas fa-map"></i> Mapa</button>
+</div>
+
+<!-- ===== BOTONES FLOTANTES ===== -->
+<div id="botones-flotantes">
+    <div id="whatsapp-float">
+        <div id="whatsapp-bubble">
+            📱 ¡Contactanos para dejarnos tu opinión!
+            <button id="btnCerrarWhatsapp">✕</button>
+        </div>
+        <a href="https://wa.me/5493511234567?text=Hola!%20Quería%20hacer%20una%20consulta%20sobre%20Capilla%20del%20Monte" target="_blank" id="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <div id="emergencia-float">
+        <button id="btnEmergencia" class="btn-emergencia">
+            <i class="fas fa-triangle-exclamation"></i>
+        </button>
+        <div id="emergencia-menu" style="display:none;">
+            <button onclick="llamarEmergencia('policia')" class="emergencia-item policia">
+                <i class="fas fa-shield-halved"></i> Policía (101)
+            </button>
+            <button onclick="llamarEmergencia('bomberos')" class="emergencia-item bomberos">
+                <i class="fas fa-fire-extinguisher"></i> Bomberos (100)
+            </button>
+            <button onclick="llamarEmergencia('ambulancia')" class="emergencia-item ambulancia">
+                <i class="fas fa-truck-medical"></i> Ambulancia (107)
+            </button>
+            <button onclick="reportarEmergencia('incendio')" class="emergencia-item incendio">
+                <i class="fas fa-fire"></i> Reportar incendio
+            </button>
+            <button onclick="reportarEmergencia('robo')" class="emergencia-item robo">
+                <i class="fas fa-mask"></i> Reportar robo
+            </button>
+            <button onclick="enviarUbicacionEmergencia()" class="emergencia-item ubicacion">
+                <i class="fas fa-location-dot"></i> Enviar ubicación
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== POP-UP DE NOTIFICACIONES ===== -->
+<div id="notificacionesPopup" style="display:none;">
+    <div class="notificaciones-popup-content">
+        <button id="btnCerrarNotificaciones" class="notificaciones-popup-close"><i class="fas fa-xmark"></i></button>
+        <h2><i class="fas fa-bell"></i> Notificaciones</h2>
+        <p style="color:#8B6B4A;font-size:13px;margin-bottom:16px;">Activá o desactivá las notificaciones por sección</p>
+        
+        <div class="notificacion-toggle">
+            <div class="toggle-item">
+                <span><i class="fas fa-calendar-day"></i> Eventos</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleEventos" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-item">
+                <span><i class="fas fa-newspaper"></i> Novedades</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleNovedades" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-item">
+                <span><i class="fas fa-bullhorn"></i> Noticias</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleNoticias" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <button id="btnGuardarNotificaciones" class="btn-guardar-notificaciones">
+            <i class="fas fa-save"></i> Guardar preferencias
+        </button>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>🌄 Capilla del Monte - Tu guía turística</p>
+</footer>
+
+<!-- ===== FIREBASE CONFIGURACIÓN ===== -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
+  import { getFirestore, collection, onSnapshot, query, orderBy } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js';
+
+  // 🔴 REEMPLAZAR FIREBASE
+  const firebaseConfig = {
+    apiKey: "AIzaSyAW6cL1MFajKqgoDgSMZ-Fos4MnxFNGZYE",
+    authDomain: "cerrocapilla1-c01f4.firebaseapp.com",
+    databaseURL: "https://cerrocapilla1-c01f4-default-rtdb.firebaseio.com",
+    projectId: "cerrocapilla1-c01f4",
+    storageBucket: "cerrocapilla1-c01f4.firebasestorage.app",
+    messagingSenderId: "43139284134",
+    appId: "1:43139284134:web:f093f7b368658ac9010867"
+  
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Exponer Firebase globalmente para que app.js pueda usarlo
+  window.firebaseDB = db;
+  window.firebaseHelpers = {
+    collection,
+    onSnapshot,
+    query,
+    orderBy
+  };
+</script>
+
+<!-- ===== TU SCRIPT PRINCIPAL ===== -->
+<script src="app.js?v=20250828"></script>
+</body>
+</html>
