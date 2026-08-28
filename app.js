@@ -3542,7 +3542,7 @@ const noticias = [
         descripcion: "Capilla del Monte se posicionó en el top 10 de los destinos turísticos más elegidos del país.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia328/400/200", fecha: "5 de Agosto"
     },
-    /*{
+    {
         id: 329, nombre: "Nuevo plan de movilidad turística", categoria: "Noticia",
         direccion: "Municipalidad", coordenadas: [-30.8563, -64.5256],
         telefono: "+5493548890123", whatsapp: "+5493548890123", instagram: "@movilidadcapilla",
@@ -3551,7 +3551,7 @@ const noticias = [
         descripcion: "Se presentó un nuevo plan de movilidad turística con rutas y horarios de transporte público.",
         metodoPago: [], foto: "https://picsum.photos/seed/noticia329/400/200", fecha: "12 de Agosto"
     },
-    {
+    /*{
         id: 330, nombre: "Se inaugura el mirador del Uritorco", categoria: "Noticia",
         direccion: "Cerro Uritorco - Cima", coordenadas: [-30.8400, -64.4900],
         telefono: "+5493548901234", whatsapp: "+5493548901234", instagram: "@miradoruritorco",
