@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🌄 Capilla del Monte - Guía Turística</title>
+    
+    <link rel="stylesheet" href="style.css?v=20250828">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ===== BARRA SUPERIOR ===== -->
+<header>
+    <div class="logo">
+        <i class="fas fa-mountain"></i>
+        <span class="logo-full">Capilla del Monte</span>
+        <span class="logo-short" style="display:none;">Capilla</span>
+    </div>
+    <div class="header-actions">
+        <a href="https://facebook.com/turismocapilla" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/turismocapilla" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/turismocapilla" target="_blank"><i class="fab fa-twitter"></i></a>
+        <button id="btnMiUbicacion" title="Ir a mi ubicación">
+            <i class="fas fa-location-dot"></i>
+        </button>
+        <button id="btnNotificaciones" title="Notificaciones" style="background:#D4A843;color:white;position:relative;">
+            <i class="fas fa-bell"></i>
+            <span id="notificacionesBadge" style="display:none;position:absolute;top:-4px;right:-4px;background:#E74C3C;color:white;font-size:10px;font-weight:700;border-radius:50%;min-width:18px;height:18px;align-items:center;justify-content:center;border:2px solid white;padding:0 4px;font-family:'Nunito',sans-serif;line-height:1;">0</span>
+        </button>
+    </div>
+</header>
+
+<!-- ============================================================
+     POP-UP / MARQUESINA
+     ============================================================ -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-container">
+
+        <!-- Botón cerrar -->
+        <button class="btn-close-popup" id="closePopup" aria-label="Cerrar">✕</button>
+
+        <!-- Slider -->
+        <div class="popup-slider-wrapper">
+
+            <div class="popup-slides-track" id="popupSlidesTrack">
+
+                <!-- ===== SLIDE 1 - Estilo "municipal" ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar">
+                     <img src="https://turismocapilla.gob.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-24-at-11.38.51-1536x555.jpeg" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">
+                    <!--<h2>En el mes de la</h2>-->
+                    <!--<div class="subtitle">DICCIONARIO</div>
+                    <div class="subtitle" style="font-weight:700; font-size:clamp(1.1rem,3vw,1.8rem);">
+                        BIA EDICIÓN
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0 8px; margin:2px 0;">
+                        <span style="font-size:clamp(1.4rem,4.5vw,2.8rem); font-weight:900; color:#1e3c5c;">venisa</span>
+                        <span style="font-size:clamp(1rem,2vw,1.4rem); color:#5d4e37; display:flex; align-items:center;">·</span>
+                        <span style="font-size:clamp(1.4rem,4.5vw,2.8rem); font-weight:900; color:#8b1a1a;">Capita</span>
+                    </div>
+                    <div class="location">DEL MONTE</div>
+                    <div class="highlight">y te regalamos</div>
+                    <div style="font-size:clamp(1.8rem,6vw,3.6rem); font-weight:900; color:#b8860b; font-family:'Times New Roman',serif; line-height:1.2;">
+                        una noche
+                    </div>
+                    <div style="margin-top:clamp(6px,1vw,14px); font-size:clamp(0.65rem,1.1vw,0.95rem); color:#3d2b1f; background:#ede7d9; padding:clamp(4px,0.6vw,10px) clamp(12px,2vw,28px); border-radius:30px; display:inline-block; text-align:center; line-height:1.3;">
+                        MUNICIPIO DE MARCA DEL MONTE
+                    </div>
+                    <div class="fine-print">EL LAGO DE LA REALIDAD</div>-->
+                    <!--<span class="cta">👉 Ver más</span>-->
+                </div>
+
+                <!-- ===== SLIDE 2 - Oferta ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar/que-hacer/">
+                    <img src="https://turismocapilla.gob.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-21-at-09.28.01-1-1536x555.jpeg" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">
+
+                    <!--<h2>🌟 Super Oferta</h2>
+                    <div class="big-number">50% OFF</div>
+                    <div style="font-size:clamp(1rem,2.8vw,1.8rem); color:#1e3c5c; font-weight:700; line-height:1.2;">
+                        en toda la tienda
+                    </div>
+                    <div style="margin:4px 0; font-size:clamp(0.8rem,1.6vw,1.2rem); color:#5d4e37;">
+                        ¡Solo por tiempo limitado!
+                    </div>
+                    <div class="tag">🛒 Comprar ahora</div>
+                    <div class="fine-print">Válido hasta agotar stock</div>-->
+                </div>
+
+                <!-- ===== SLIDE 3 - Evento ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar/eventos/">
+                  <img src="https://turismocapilla.gob.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-18-at-11.02.13-1536x555.jpeg" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">  
+
+                    <!--<h2>🎭 Gran Evento</h2>
+                    <div style="font-size:clamp(1.4rem,4.5vw,2.8rem); font-weight:900; color:#8b1a1a; font-family:'Times New Roman',serif; line-height:1.2;">
+                        Fiesta de la Cosecha
+                    </div>
+                    <div style="font-size:clamp(0.85rem,2vw,1.4rem); color:#3d2b1f; margin:2px 0;">
+                        Sábado 12 de Octubre
+                    </div>
+                    <div style="background:#1e3c5c; color:white; padding:clamp(4px,0.6vw,10px) clamp(16px,2.5vw,32px); border-radius:40px; display:inline-block; font-weight:bold; margin-top:4px; font-size:clamp(0.75rem,1.2vw,1rem);">
+                        📍 Plaza Central
+                    </div>
+                    <div class="fine-print">Entrada libre y gratuita</div>-->
+                </div>
+
+                <!-- ===== SLIDE 4 - Extra ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar/novedades/">
+                    <img src="https://turismocapilla.gob.ar/wp-content/uploads/2026/06/web-pc-invierno-1-1536x555.png" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">
+                    
+                    <!--<h2>📢 Nuevo</h2>
+                    <div style="font-size:clamp(1.6rem,5vw,3.2rem); font-weight:900; color:#1e3c5c; font-family:'Times New Roman',serif; line-height:1.2;">
+                        Lanzamiento
+                    </div>
+                    <div style="font-size:clamp(1rem,2.5vw,1.6rem); color:#8b1a1a; font-weight:700;">
+                        Colección Otoño 2026
+                    </div>
+                    <div style="margin:6px 0; font-size:clamp(0.8rem,1.4vw,1.1rem); color:#5d4e37;">
+                        Descubre los nuevos modelos
+                    </div>
+                    <span class="cta">🔍 Explorar</span>-->
+                </div>
+
+                <!-- ===== SLIDE 5 - Extra ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar/novedades/">
+                    <img src="https://turismocapilla.gob.ar/wp-content/uploads/2025/11/casonasportada-1536x555.png" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">
+                </div>
+
+                <!-- ===== SLIDE 5 - Extra ===== -->
+                <div class="popup-slide" data-url="https://turismocapilla.gob.ar/novedades/">
+                    <img src="https://turismocapilla.gob.ar/wp-content/uploads/2025/09/capilla1-1536x555.jpg" 
+         alt="Oferta especial" 
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:12px; margin-bottom:12px;">
+                </div>
+
+
+            </div>
+
+            <!-- Flechas -->
+            <button class="popup-arrow prev" id="popupPrevSlide" aria-label="Anterior">❮</button>
+            <button class="popup-arrow next" id="popupNextSlide" aria-label="Siguiente">❯</button>
+
+        </div>
+
+        <!-- Puntos -->
+        <div class="popup-dots-container" id="popupDotsContainer"></div>
+
+    </div>
+</div>
+
+<!-- ===== CONTENEDOR PRINCIPAL ===== -->
+<div id="main-container">
+    <div id="map"></div>
+    
+    <!-- ===== PANEL DE INFORMACIÓN ===== -->
+    <div id="info-panel" style="display: none;">
+        <div id="info-content">
+            <button id="btnCerrarInfo"><i class="fas fa-xmark"></i></button>
+            <div class="info-header">
+                <h2 id="infoNombre">Nombre</h2>
+                <span id="infoCategoria" class="categoria-badge">Categoría</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-location-dot"></i>
+                <span id="infoDireccion">Dirección</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span id="infoHorario">Horario</span>
+            </div>
+            <p id="infoDescripcion" class="info-descripcion"></p>
+            <div id="infoDelivery" class="info-delivery">
+                <i class="fas fa-truck"></i>
+                <span id="infoDeliveryTexto">Delivery disponible</span>
+            </div>
+            <!--los iconos para modificar donde sea-->
+            <div id="infoIconos" class="contenedor-iconos" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding: 8px 0;"></div>
+            <!--hasta aca-->
+
+            <div class="info-redes">
+                <a id="infoWhatsapp" href="#" target="_blank" class="red-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                <a id="infoTelefono" href="#" target="_blank" class="red-btn telefono"><i class="fas fa-phone"></i></a>
+                <a id="infoInstagram" href="#" target="_blank" class="red-btn instagram"><i class="fab fa-instagram"></i></a>
+                <a id="infoFacebook" href="#" target="_blank" class="red-btn facebook"><i class="fab fa-facebook"></i></a>
+                <a id="infoTwitter" href="#" target="_blank" class="red-btn twitter"><i class="fab fa-twitter"></i></a>
+                <a id="infoWeb" href="#" target="_blank" class="red-btn web"><i class="fas fa-globe"></i></a>
+            </div>
+            <button id="btnComoLlegar" class="btn-como-llegar">
+                <i class="fas fa-route"></i> Cómo llegar
+            </button>
+        </div>
+    </div>
+    
+    <!-- ===== BOTÓN LUGARES CERCANOS ===== -->
+    <button id="btnCercanos" class="btn-cercanos">
+        <i class="fas fa-map-location-dot"></i>
+        <span>Lugares cercanos</span>
+    </button>
+</div>
+
+<!-- ===== MODAL DE LUGARES CERCANOS ===== -->
+<div id="modalCercanos" style="display: none;">
+    <div class="modal-content">
+        <button class="modal-close" id="btnCerrarModal"><i class="fas fa-xmark"></i></button>
+        <h3><i class="fas fa-map-location-dot"></i> Lugares cercanos</h3>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-quehacer">
+                <i class="fas fa-hiking"></i> Qué hacer
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-quehacer" class="sub-lugares" style="display:none;">
+                <div id="lista-quehacer" class="lista-sub"></div>
+            </div>
+        </div>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-dormir">
+                <i class="fas fa-hotel"></i> Dónde dormir
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-dormir" class="sub-lugares" style="display:none;">
+                <div id="lista-dormir" class="lista-sub"></div>
+            </div>
+        </div>
+        
+        <div class="categoria-lugares">
+            <button class="categoria-toggle" data-target="sub-comer">
+                <i class="fas fa-utensils"></i> Dónde comer
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div id="sub-comer" class="sub-lugares" style="display:none;">
+                <div id="lista-comer" class="lista-sub"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SECCIÓN EVENTOS ===== -->
+<div id="seccion-eventos" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-calendar-day"></i> Eventos
+            </h2>
+            <span id="badgeEventos" class="badge-android" data-seccion="eventos">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarEventos" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaEventos" class="eventos-list"></div>
+</div>
+
+<!-- ===== SECCIÓN NOVEDADES ===== -->
+<div id="seccion-novedades" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-newspaper"></i> Novedades
+            </h2>
+            <span id="badgeNovedades" class="badge-android" data-seccion="novedades">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarNovedades" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaNovedades" class="novedades-list"></div>
+</div>
+
+<!-- ===== SECCIÓN NOTICIAS ===== -->
+<div id="seccion-noticias" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-bullhorn"></i> Noticias
+            </h2>
+            <span id="badgeNoticias" class="badge-android" data-seccion="noticias">0</span>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarNoticias" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaNoticias" class="noticias-list"></div>
+</div>
+
+<!-- ===== SECCIÓN ADMIN ===== -->
+<div id="seccion-admin" style="display:none;">
+    <div class="seccion-header">
+        <div class="titulo-badge-container">
+            <h2>
+                <i class="fas fa-user-shield"></i> Admin
+            </h2>
+        </div>
+        <div class="header-badge-container">
+            <button id="btnCerrarAdmin" class="btn-cerrar-seccion"><i class="fas fa-xmark"></i></button>
+        </div>
+    </div>
+    <div id="listaAdmin" class="admin-list">
+        <p style="text-align:center;color:#8B6B4A;padding:20px;">🔒 Panel de administración</p>
+        <p style="text-align:center;color:#2E7D32;font-size:13px;">Solo visible para el desarrollador</p>
+    </div>
+</div>
+
+<!-- ===== MENÚ INFERIOR CON BADGES ===== -->
+<div id="menu-secciones">
+    <button id="btnVerEventos" class="menu-btn">
+        <i class="fas fa-calendar-day"></i> Eventos
+        <span id="menuBadgeEventos" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerNovedades" class="menu-btn">
+        <i class="fas fa-newspaper"></i> Novedades
+        <span id="menuBadgeNovedades" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerNoticias" class="menu-btn">
+        <i class="fas fa-bullhorn"></i> Noticias
+        <span id="menuBadgeNoticias" class="badge-menu-android">0</span>
+    </button>
+    <button id="btnVerAdmin" class="menu-btn" style="display:none;"><i class="fas fa-user-shield"></i> Admin</button>
+    <button id="btnVerMapa" class="menu-btn active"><i class="fas fa-map"></i> Mapa</button>
+</div>
+
+<!-- ===== BOTONES FLOTANTES ===== -->
+<div id="botones-flotantes">
+    <div id="whatsapp-float">
+        <div id="whatsapp-bubble">
+            📱 ¡Contactanos para dejarnos tu opinión!
+            <button id="btnCerrarWhatsapp">✕</button>
+        </div>
+        <a href="https://wa.me/5493511234567?text=Hola!%20Quería%20hacer%20una%20consulta%20sobre%20Capilla%20del%20Monte" target="_blank" id="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+    <div id="emergencia-float">
+        <button id="btnEmergencia" class="btn-emergencia">
+            <i class="fas fa-triangle-exclamation"></i>
+        </button>
+        <div id="emergencia-menu" style="display:none;">
+            <button onclick="llamarEmergencia('policia')" class="emergencia-item policia">
+                <i class="fas fa-shield-halved"></i> Policía (101)
+            </button>
+            <button onclick="llamarEmergencia('bomberos')" class="emergencia-item bomberos">
+                <i class="fas fa-fire-extinguisher"></i> Bomberos (100)
+            </button>
+            <button onclick="llamarEmergencia('ambulancia')" class="emergencia-item ambulancia">
+                <i class="fas fa-truck-medical"></i> Ambulancia (107)
+            </button>
+            <button onclick="reportarEmergencia('incendio')" class="emergencia-item incendio">
+                <i class="fas fa-fire"></i> Reportar incendio
+            </button>
+            <button onclick="reportarEmergencia('robo')" class="emergencia-item robo">
+                <i class="fas fa-mask"></i> Reportar robo
+            </button>
+            <button onclick="enviarUbicacionEmergencia()" class="emergencia-item ubicacion">
+                <i class="fas fa-location-dot"></i> Enviar ubicación
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== POP-UP DE NOTIFICACIONES ===== -->
+<div id="notificacionesPopup" style="display:none;">
+    <div class="notificaciones-popup-content">
+        <button id="btnCerrarNotificaciones" class="notificaciones-popup-close"><i class="fas fa-xmark"></i></button>
+        <h2><i class="fas fa-bell"></i> Notificaciones</h2>
+        <p style="color:#8B6B4A;font-size:13px;margin-bottom:16px;">Activá o desactivá las notificaciones por sección</p>
+        
+        <div class="notificacion-toggle">
+            <div class="toggle-item">
+                <span><i class="fas fa-calendar-day"></i> Eventos</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleEventos" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-item">
+                <span><i class="fas fa-newspaper"></i> Novedades</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleNovedades" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-item">
+                <span><i class="fas fa-bullhorn"></i> Noticias</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="toggleNoticias" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <button id="btnGuardarNotificaciones" class="btn-guardar-notificaciones">
+            <i class="fas fa-save"></i> Guardar preferencias
+        </button>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>🌄 Capilla del Monte - Tu guía turística</p>
+</footer>
+
+<!-- ===== FIREBASE CONFIGURACIÓN (REALTIME DATABASE) ===== -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js';
+  import { getDatabase, ref, onValue, set, update, remove } from 'https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAW6cL1MFajKqgoDgSMZ-Fos4MnxFNGZYE",
+    authDomain: "cerrocapilla1-c01f4.firebaseapp.com",
+    databaseURL: "https://cerrocapilla1-c01f4-default-rtdb.firebaseio.com",
+    projectId: "cerrocapilla1-c01f4",
+    storageBucket: "cerrocapilla1-c01f4.firebasestorage.app",
+    messagingSenderId: "43139284134",
+    appId: "1:43139284134:web:f093f7b368658ac9010867"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Exponer Firebase globalmente
+  window.firebaseDB = db;
+  window.firebaseHelpers = {
+    ref,
+    onValue,
+    set,
+    update,
+    remove
+  };
+  
+  // Indicar que Firebase está listo
+  window.firebaseReady = true;
+  console.log('✅ Firebase Realtime Database inicializado');
+</script>
+
+<!-- ===== TU SCRIPT PRINCIPAL ===== -->
+<script src="app.js?v=20250828"></script>
+
+</body>
+</html>
